@@ -1,5 +1,4 @@
 * {
-    box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
@@ -11,7 +10,8 @@ a {
 
 img {
     display: block;
-    border: 0;
+    max-width: 100%;
+    height: auto;
 }
 
 header {
@@ -24,7 +24,7 @@ header {
     width: 100%;
     padding: 0 20px;
     text-align: center;
-    background-color: purple;
+    background-color: blueviolet;
 }
 
 header>form {
@@ -45,7 +45,7 @@ header>form {
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
-    width: calc((100% - 72px) / 4);
+    flex-basis: calc(100% / 4 - 20px);
     margin-right: 24px;
     margin-bottom: 24px;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
@@ -75,21 +75,4 @@ header>form {
     width: 100%;
     text-align: center;
     font-size: 12px;
-}
-
-.load-more {
-    display: block;
-    margin: 0 auto 42px;
-    width: 250px;
-    height: 42px;
-    font-size: 15px;
-    color: white;
-    background-color: steelblue;
-    box-shadow: none;
-    border: 1px solid black;
-    border-radius: 4px;
-}
-
-.load-more:active {
-    box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
