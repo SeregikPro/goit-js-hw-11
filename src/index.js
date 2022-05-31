@@ -1,28 +1,26 @@
-import './css/main.css';
-import galleryCard from './templates/picture-card.hbs';
+import pictureItemTemp from './templates/picture-card.hbs';
 import imageApiService from './js/api';
-import SimpleLightbox from "simplelightbox";
-import "simplelightbox/dist/simple-lightbox.min.css";
-import Notiflix from 'notiflix';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import refs from './js/refs';
-import throttle from 'lodash.throttle';
 
 let imageApi = new imageApiService();
 let lightbox = new SimpleLightbox('.gallery a');
 
 function createCardMarkup(images) {
   const imageMarkup = images.hits.reduce((acc, image) => {
-    return (acc += galleryItemTpl(image));
+    return (acc += pictureItemTemp(image));
   }, '');
 
   refs.galleryContainer.insertAdjacentHTML('beforeend', imageMarkup);
   lightbox.refresh();
 }
 
-async function onSearchFormSubmit(e) {
-  e.preventDefault();
+async function onSearchFormSubmit(evt) {
+  evt.preventDefault();
   refs.scrollDiv.classList.add('hidden');
-  imageApi.query = e.currentTarget.elements.searchQuery.value;
+  imageApi.query = evt.currentTarget.elements.searchQuery.value;
   imageApi.resetPage();
   clearGallery();
 
@@ -53,8 +51,8 @@ const options = {
 
 function onEntry(entries) {
   entries.forEach(entry => {
-    if (entry.isIntersecting && pixabayApi.searchString !== '') {
-      pixabayApi.fetchImages().then(createCardMarkup);
+    if (entry.isIntersecting && imageApi.searchString !== '') {
+      imageApi.fetchImages().then(createCardMarkup);
     }
   });
 }
